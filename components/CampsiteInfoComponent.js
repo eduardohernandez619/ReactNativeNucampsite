@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import {CAMPSITES} from '../shared/campsites'; 
@@ -32,7 +32,7 @@ class CampsiteInfo extends Component {
 
     render(){
         const campsiteId = this.props.navigation.getParam('campsiteId');
-        const campsite = this.state.campsites.filter(campsite => campsite.id ===campsiteId)[0];
+        const campsite = this.state.campsites.filter(campsite => campsite.id === campsiteId)[0];
         return <RenderCampsite campsite={campsite} />;
     }
 }
