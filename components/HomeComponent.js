@@ -1,17 +1,23 @@
 import React, {Component} from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import {Card} from 'react-native-elements';
-import {CAMPSITES} from '../shared/campsites';
-import {PROMOTIONS} from '../shared/promotions';
-import {PARTNERS} from '../shared/partners';
-//import { timesSeries } from 'async';
+import {connect} from 'react-redux';
+import {baseUrl} from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        campsites: state.campsites,
+        promotions: state.promotions,
+        partners: state.partners
+    };
+};
 
 function RenderItem({item}) {
     if (item) {
         return (
             <Card
                 featuredTitle={item.name}
-                image={require('./images/react-lake.jpg')}
+                image={{uri: baseUrl + item.image}}
             >
                 <Text
                     style={{margin: 10}}>
