@@ -90,7 +90,7 @@ class Favorites extends Component {
                     keyExtractor={item => item.id.toString()}
                 />
             </Animatable.View>
-        );
+        ); 
     }
 }
 
