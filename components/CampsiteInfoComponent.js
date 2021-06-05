@@ -8,7 +8,8 @@ import {
   Button,
   StyleSheet,
   Alert,
-  PanResponder, Share
+  PanResponder,
+  Share,
 } from "react-native";
 import { Card, Icon, Rating, Input } from "react-native-elements";
 import { connect } from "react-redux";
@@ -31,7 +32,6 @@ const mapDispatchToProps = {
 };
 
 function RenderCampsite(props) {
-
   const { campsite } = props;
 
   const view = React.createRef();
@@ -43,8 +43,11 @@ function RenderCampsite(props) {
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderGrant: () => {
-      view.current.rubberBand(1000)
-      .then(endState => console.log(endState.finished ? 'finished' : 'canceled'));
+      view.current
+        .rubberBand(1000)
+        .then((endState) =>
+          console.log(endState.finished ? "finished" : "canceled")
+        );
     },
     onPanResponderEnd: (e, gestureState) => {
       console.log("pan responder end", gestureState);
@@ -68,24 +71,24 @@ function RenderCampsite(props) {
           ],
           { cancelable: false }
         );
-      }
-      else if (recognizeComment(gestureState)) {
-        props.onShowModal()
+      } else if (recognizeComment(gestureState)) {
+        props.onShowModal();
       }
       return true;
-      
     },
-
   });
 
   const shareCampsite = (title, message, url) => {
-    Share.share({
-      title,
-      message: `${title}: ${message} ${url}`,
-      url
-    }, {
-      dialogTitle: 'Share ' + title
-    });
+    Share.share(
+      {
+        title,
+        message: `${title}: ${message} ${url}`,
+        url,
+      },
+      {
+        dialogTitle: "Share " + title,
+      }
+    );
   };
 
   if (campsite) {
@@ -124,14 +127,19 @@ function RenderCampsite(props) {
               onPress={() => props.onShowModal()}
             />
             <Icon
-              name={'share'}
+              name={"share"}
               type="font-awesome"
               color="#5637DD"
               raised
               reverse
-              onPress={() => shareCampsite(campsite.name, campsite.description, baseUrl + campsite.image)}
+              onPress={() =>
+                shareCampsite(
+                  campsite.name,
+                  campsite.description,
+                  baseUrl + campsite.image
+                )
+              }
             />
-
           </View>
         </Card>
       </Animatable.View>
